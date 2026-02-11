@@ -3,8 +3,9 @@ import pandas as pd
 
 
 # df = pd.read_csv("/Users/saravanakumar/Dev/nav-backtesting/hdfc-balance.csv")
-# df = pd.read_csv("/Users/saravanakumar/Dev/nav-backtesting/icici-nav.csv")
-df = pd.read_csv("/Users/saravanakumar/Dev/nav-backtesting/nippon-gold.csv")
+df = pd.read_csv("/Users/saravanakumar/Dev/nav-backtesting/icici-nav.csv")
+# df = pd.read_csv("/Users/saravanakumar/Dev/nav-backtesting/nippon-gold.csv")
+# df = pd.read_csv("/Users/saravanakumar/Dev/nav-backtesting/ab-medium-term.csv")
 # df = pd.read_csv("/Users/saravanakumar/Dev/nav-backtesting/ppfa.csv")
 
 df['date'] = pd.to_datetime(df['date'])
@@ -28,9 +29,9 @@ df["change_3"] = df["change_percentage"].rolling(window=3).mean()
 df["change_5"] = df["change_percentage"].rolling(window=5).mean()
 df["change_8"] = df["change_percentage"].rolling(window=8).mean()
 df["change_10"] = df["change_percentage"].rolling(window=10).mean()
+df["cum_mean"] = df["change_1"].expanding().mean()
 
 
 df = df.round(2)
 
-print(df[["change_1", "change_3", "change_5", "change_8", "change_10"]])
-print(round(df["change_1"].mean(),2))
+print(df[["change_1", "change_3", "change_5", "change_8", "change_10", "cum_mean"]])
